@@ -1,5 +1,6 @@
 import React from "react";
 import io from "socket.io-client";
+import './Chat.css';
 
 class Chat extends React.Component{
     constructor(props){
@@ -38,9 +39,7 @@ class Chat extends React.Component{
     render(){
         return(
             <div className="container">
-                <div className="chat-body">
-                    <div className="chat-title">Global Chat</div>
-                    <hr/>
+                {/* <div className="chat-body">
                     <div className="messages">
                         {this.state.messages.map(message => {
                             return(
@@ -48,13 +47,17 @@ class Chat extends React.Component{
                             )
                         })}
                     </div>
-                </div>
+                </div> */}
 
-                <div className="chat-input">
-                    <input type="text" placeholder="UserName" onChange={ev => this.setState({username: ev.target.value})}/>
-                    <br/>
-                    <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
-                    <button onClick={this.sendMessage} className="send">Send</button>
+                <div className="login page">
+                    <h1>最佳時雞</h1>
+                    <div className="form">
+                        <h3>Enter your name</h3>
+                        <input className="usrinput" type="text" placeholder="UserName" onChange={ev => this.setState({username: ev.target.value})}/>
+                        <br/>
+                        {/* <input className="usrinput" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/> */}
+                        {/* <button onClick={this.sendMessage} className="send">Send</button> */}
+                    </div>
                 </div>
             </div>
         );
