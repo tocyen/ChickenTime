@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Chat from "./Chat";
+import './App.css';
+import Name from './Name'
+
 
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-          <Chat/>
-      </div>
+      <Name name="確認" />
     );
+
   }
 }
+
 
 export default App;

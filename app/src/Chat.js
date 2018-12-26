@@ -9,21 +9,22 @@ class Chat extends React.Component{
         this.state={
             username: '',
             massage: '',
-            messages: []
+            messages: [],
+            numUsers: 0
         };
 
         this.socket = io('localhost:8080');
 
         this.sendMessage = ev => {
             ev.preventDefault();
-            this.socket.emit('SEND_MESSAGE', {
+            this.socket.emit('send_message', {
                 author: this.state.username,
                 message: this.state.message
             });
             this.setState({message: ''});
         }
 
-        this.socket.on('RECEIVE_MESSAGE', function(data){
+        this.socket.on('receive_message', function(data){
             addMessage(data);
         });
 
@@ -39,24 +40,19 @@ class Chat extends React.Component{
     render(){
         return(
             <div className="container">
-                {/* <div className="chat-body">
-                    <div className="messages">
-                        {this.state.messages.map(message => {
-                            return(
-                                <div>{message.author}: {message.message}</div>
-                            )
-                        })}
-                    </div>
-                </div> */}
-
                 <div className="login page">
                     <h1>最佳時雞</h1>
                     <div className="form">
                         <h3>Enter your name</h3>
                         <input className="usrinput" type="text" placeholder="UserName" onChange={ev => this.setState({username: ev.target.value})}/>
                         <br/>
-                        {/* <input className="usrinput" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/> */}
-                        {/* <button onClick={this.sendMessage} className="send">Send</button> */}
+                        <input className="usrinput" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
+                        <button onClick={this.sendMessage} className="send">Send</button>
+                        <div className="messages">
+                            {this.state.messages.map(message => {
+                                return( <div>{message.author}: {message.message}</div>)
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>
