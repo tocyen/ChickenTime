@@ -10,7 +10,7 @@ html, body{
     padding: 0;
 }
 
-.Name-wrapper{
+.Room-wrapper{
     height: 100%;
     margin: 0;
     padding: 0;
@@ -25,17 +25,17 @@ h2{
     color: #fff;
 }
 
-.page {
+.room.select{
+    background-color: #EBBC25;
+}
+
+.select{
     height: 100%;
     width: 100%;
     position: absolute;
 }
 
-.login.page{
-    background-color: #EBBC25;
-}
-
-.login.page .form{
+.room.select .form2{
     height: 100px;
     margin-top: -15%;
     position: relative;
@@ -44,29 +44,30 @@ h2{
     width: 100%;
 }
 
-.login.page .form .usrinput{
-    background-color: transparent;
-    border: none;
-    border-bottom: 3px solid #fff;
-    outline: none;
-    padding-bottom: 12px;
-    text-align: center;
-    font-size: 200%;
+ul{
+    padding: 0;
 }
 
-.confirm-button{
+.joinroom-button{
     background: #3498db;
-    width: 30%;
     padding: 3px;
+    width: 30%;
     display: inline-block;
-    margin-top: 25%;
     border-radius: 3px;
     box-shadow: 0px 17px 10px -10px rgba(0,0,0,0.4);
     list-style-type:none;
 }
 
-ul{
-    padding: 0;
+.createroom-button{
+    background: #3498db;
+    padding: 3px;
+    width: 30%;
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 25%;
+    border-radius: 3px;
+    box-shadow: 0px 17px 10px -10px rgba(0,0,0,0.4);
+    list-style-type:none;
 }
 
 p{
@@ -76,4 +77,3 @@ p{
     font-weight: 400;
     font-size: 28px;
 }
-

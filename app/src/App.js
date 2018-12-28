@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import Name from './Name'
+import Name from './Name';
+import Room from  './Room';
+
 
 
 
 class App extends Component {
   render() {
     return (
-      <Name name="確認" />
+      // <Name />
+      <Room />
     );
 
   }
