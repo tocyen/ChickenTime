@@ -24,22 +24,34 @@ html, body{
     background-color: rgba(236, 236, 236, 0.9);
     border-radius: 5px;
     margin: 0 auto;
-    width: 70%;
+    width: 60%;
     position: fixed;
     bottom: 30%;
     left: 8%;
     letter-spacing: 2px;
     font-weight: 400;
-    padding: 10px;
-    font-size: 20px;
+    padding: 15px;
+    font-size: 18px;
     text-align:left;
 }
 
-
 .nav-icon{
     position: absolute;
-	font-size: 30px;
-    /* right: 1rem; */
-    left: 72%;
-    bottom: 31%;
+	font-size: 40px;
+    left: 92%;
+    bottom: -3%;
+}
+
+.dialog-title{
+    font-size: 30px;
+    position: absolute;
+    font-weight: 600;
+    left: 45%;
+    bottom: 120%;
+}
+
+.item{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
 }
