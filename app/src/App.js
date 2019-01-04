@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Name from './Name';
-import Room from  './Room';
+import Name from './ui/Name';
+import Room from  './ui/Room';
 
 
 
@@ -9,8 +9,7 @@ import Room from  './Room';
 class App extends Component {
   render() {
     return (
-      // <Name />
-      <Room />
+      <Name />
     );
 
   }
