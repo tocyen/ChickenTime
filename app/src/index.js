@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from './App';
-import Room from './ui/Room';
-import Name from './ui/Name';
+import Join from './ui/Join';
 import Tutorial from './ui/Tutorial';
+import Create from './ui/Create';
 import * as serviceWorker from './serviceWorker';
 
 
@@ -16,7 +16,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 
-ReactDOM.render(<Room />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

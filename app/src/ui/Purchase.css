@@ -1,0 +1,62 @@
+.money-wrapper{
+    text-align: left;
+    padding: 10px;
+}
+
+.money{
+    width: 5%;
+    vertical-align: bottom;
+}
+
+span{
+    font-size: 120%;
+    font-weight: 400;
+    padding-left: 10px;
+}
+
+.purchase-title{
+    font-size: 150%;
+    font-weight: 400;
+}
+
+
+.item-list{
+    display: inline-block;
+    width: 50%;
+    margin-top: 24px;
+}
+
+.item-list li{
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+}
+
+.item{
+    width: 60%;
+}
+
+.item-name{
+    text-align: center;
+    font-size: 150%;
+    font-weight: 400;
+}
+
+.item-num{
+    font-size: 150%;
+    font-weight: 400;
+}
+
+.item-button{
+    font-size: 150%;
+    font-weight: 400;
+    border: 3px solid black;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #D26406;
+    color: #fff;
+    padding: 5px;
+}
+
+ul{
+    margin: 0;
+}
