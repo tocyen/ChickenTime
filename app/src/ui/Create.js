@@ -15,7 +15,7 @@ class Create extends Component{
                     <li>Joan</li>
                     <li>John</li>
                 </ul>
-                <div className="start-button" onClick={() => {this.props.changeSection(3)}}><p>開始遊戲</p></div>
+                <div className="start-button" onClick={() => {this.props.changeSection(4)}}><p>開始遊戲</p></div>
             </div>
         )
     }

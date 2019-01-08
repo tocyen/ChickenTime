@@ -7,6 +7,7 @@ import Tutorial from './ui/Tutorial'
 import Purchase from './ui/Purchase'
 import Action from './ui/Action'
 import Season from './ui/Season'
+import Join from './ui/Join'
 
 
 class App extends Component {
@@ -50,11 +51,11 @@ class App extends Component {
       {this.state.currentSection === 0 ? <Name updateName={this.updateName} /> : null}
       {this.state.currentSection === 1 ? <Room name={this.state.name} changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 2 ? <Create changeSection={this.changeSection}/> : null}
-      {/* {this.state.currentSection === 2 ? <Create changeSection={this.changeSection}/> : null} */}
-      {this.state.currentSection === 3 ? <Tutorial changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 4 ? <Purchase changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 5 ? <Season changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 6 ? <Action changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 3 ? <Join changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 4 ? <Tutorial changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 5 ? <Purchase changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 6 ? <Season changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 7 ? <Action changeSection={this.changeSection}/> : null}
       </div>
     );
 

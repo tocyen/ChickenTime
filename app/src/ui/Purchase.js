@@ -54,7 +54,7 @@ class Purchase extends Component{
                     <li className="item-num">$ 1</li>
                     <li className="item-button">購買</li>
                 </ul>
-                <div className="startgame-button" onClick={() => {this.props.changeSection(5)}}>開始對戰</div>
+                <div className="startgame-button" onClick={() => {this.props.changeSection(6)}}>開始對戰</div>
             </div>
         )
     }

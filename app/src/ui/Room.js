@@ -11,7 +11,7 @@ class Room extends Component {
               <h2>最佳時雞</h2>
               <div className="username">Hi, {this.props.name}</div>
               <ul className="join-create">
-                <li className="joinroom-button"><p>加入房間</p></li>
+                <li className="joinroom-button" onClick={() => {this.props.changeSection(3)}}><p>加入房間</p></li>
                 <li className="createroom-button" onClick={() => {this.props.changeSection(2)}}><p>建立房間</p></li>
               </ul>
           </div>

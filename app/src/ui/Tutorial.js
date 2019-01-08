@@ -39,7 +39,7 @@ class Tutorial extends Component{
     updateDialog(){
             this.setState({dialogNum: this.state.dialogNum + 1})
             if(this.state.dialogNum === 6){
-                this.props.changeSection(4)
+                this.props.changeSection(5)
             }
     }
 
