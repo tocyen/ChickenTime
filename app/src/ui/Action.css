@@ -1,0 +1,32 @@
+.Action-wrapper{
+}
+
+.opacity-black{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.action-box{
+    font-weight: 500;
+    border: 2px solid black;
+    width: 50%;
+    border-collapse: collapse;
+    background-color: #D26406;
+}
+
+td{
+    border: 2px solid black;
+    padding: 20px;
+    font-size: 150%;
+}
+
+.action-intro{
+    font-size: 150%;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 20px;
+}

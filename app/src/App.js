@@ -5,14 +5,17 @@ import Room from  './ui/Room';
 import Create from './ui/Create'
 import Tutorial from './ui/Tutorial'
 import Purchase from './ui/Purchase'
+import Action from './ui/Action'
+import Season from './ui/Season'
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSection: 4,
+      currentSection: 1,
       name: '',
+      actiontime: 0,
     };
     this.updateName = this.updateName.bind(this)
     this.changeSection = this.changeSection.bind(this)
@@ -29,6 +32,15 @@ class App extends Component {
     });
   }
 
+  conductActionTime(){
+    for(var i=0; i<10; i++){
+      const randomNum = Math.floor(Math.random()*10+1)
+      this.setState({
+        actiontime: randomNum,
+      })
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -36,10 +48,13 @@ class App extends Component {
 
 
       {this.state.currentSection === 0 ? <Name updateName={this.updateName} /> : null}
-      {this.state.currentSection === 1 ? <Room name={this.state.name}/> : null}
+      {this.state.currentSection === 1 ? <Room name={this.state.name} changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 2 ? <Create changeSection={this.changeSection}/> : null}
+      {/* {this.state.currentSection === 2 ? <Create changeSection={this.changeSection}/> : null} */}
       {this.state.currentSection === 3 ? <Tutorial changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 4 ? <Purchase changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 5 ? <Season changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 6 ? <Action changeSection={this.changeSection}/> : null}
       </div>
     );
 

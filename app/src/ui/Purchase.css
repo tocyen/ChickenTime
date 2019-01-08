@@ -1,10 +1,12 @@
 .money-wrapper{
     text-align: left;
-    padding: 10px;
+    padding-top: 20px;
+    display: inline-block;
+    width: 20%;
 }
 
 .money{
-    width: 5%;
+    width: 20%;
     vertical-align: bottom;
 }
 
@@ -17,13 +19,13 @@ span{
 .purchase-title{
     font-size: 150%;
     font-weight: 400;
+    display: inline-block;
 }
-
 
 .item-list{
     display: inline-block;
     width: 50%;
-    margin-top: 24px;
+    margin-top: 20px;
 }
 
 .item-list li{
@@ -48,7 +50,7 @@ span{
 }
 
 .item-button{
-    font-size: 150%;
+    font-size: 100%;
     font-weight: 400;
     border: 3px solid black;
     border-radius: 5px 5px 5px 5px;
@@ -60,3 +62,16 @@ span{
 ul{
     margin: 0;
 }
+
+.startgame-button{
+    font-weight: 400;
+    font-size: 150%;
+    border: 3px solid black;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #41171A;
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 2%;
+}
+

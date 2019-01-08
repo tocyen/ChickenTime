@@ -15,9 +15,9 @@ class Purchase extends Component{
             <div className="purchase-wrapper">
                 <div className="money-wrapper">
                     <img className="money" src={Money} alt="" />
-                    <span>45</span>
+                    <span>$ 45</span>
                 </div>
-                <div className="purchase-title">請選擇您想購買的物品</div>
+                <div className="purchase-title">請選擇您想購買的商品（最多購買四樣商品）</div>
                 <ul className="item-list">
                     <li><img className="item" src={Smale} alt="" /></li>
                     <li className="item-name">小雞</li>
@@ -54,6 +54,7 @@ class Purchase extends Component{
                     <li className="item-num">$ 1</li>
                     <li className="item-button">購買</li>
                 </ul>
+                <div className="startgame-button" onClick={() => {this.props.changeSection(5)}}>開始對戰</div>
             </div>
         )
     }

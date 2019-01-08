@@ -1,0 +1,21 @@
+.seasontime{
+    width: 80%;
+}
+
+.deco{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0.6;
+    width: 100%;
+    height: 36%;
+    top: 32%;
+    z-index: -1;
+}
+
+.seasontext{
+    position: absolute;
+    color: #FFDBDB;
+    font-size: 250%;
+    top: 42%;
+    left: 38%;
+}

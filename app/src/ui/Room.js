@@ -12,7 +12,7 @@ class Room extends Component {
               <div className="username">Hi, {this.props.name}</div>
               <ul className="join-create">
                 <li className="joinroom-button"><p>加入房間</p></li>
-                <li className="createroom-button"><p>建立房間</p></li>
+                <li className="createroom-button" onClick={() => {this.props.changeSection(2)}}><p>建立房間</p></li>
               </ul>
           </div>
         </div>

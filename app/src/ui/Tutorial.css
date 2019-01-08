@@ -33,6 +33,7 @@ html, body{
     padding: 20px;
     font-size: 18px;
     text-align:left;
+    text-align: start;
 }
 
 .nav-icon{
@@ -50,7 +51,7 @@ html, body{
     bottom: 102%;
 }
 
-.item{
+.item-title{
     text-align: center;
     font-size: 24px;
     font-weight: 500;
@@ -74,6 +75,15 @@ html, body{
     display: inline-block;
     width: 50%;
     padding-left: 30px;
+    padding-top: 30px;
 }
 
+/* .animalpic, .animal2pic{
+    width: 20%;
+} */
+
+.animal, .animal2{
+    display: inline-block;
+
+}
 
