@@ -8,15 +8,20 @@ import Purchase from './ui/Purchase'
 import Action from './ui/Action'
 import Season from './ui/Season'
 import Join from './ui/Join'
+import SelectedAction from './ui/SelectedAction'
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSection: 7,
+      currentSection: 8,
       name: '',
       actiontime: 0,
+      feedtime: 0,
+      feedtime: 0,
+      purshasetime: 0,
+      selltime: 0,
     };
     this.updateName = this.updateName.bind(this)
     this.changeSection = this.changeSection.bind(this)
@@ -37,7 +42,10 @@ class App extends Component {
     for(var i=0; i<10; i++){
       const randomNum = Math.floor(Math.random()*10+1)
       this.setState({
-        actiontime: randomNum,
+        feedtime: randomNum,
+        feedtime: randomNum,
+        purshasetime: randomNum,
+        selltime: randomNum,
       })
     }
   }
@@ -56,6 +64,7 @@ class App extends Component {
       {this.state.currentSection === 5 ? <Purchase changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 6 ? <Season changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 7 ? <Action changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 8 ? <SelectedAction changeSection={this.changeSection}/> : null}
       </div>
     );
 

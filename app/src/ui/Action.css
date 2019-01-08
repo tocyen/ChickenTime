@@ -4,7 +4,7 @@
 .opacity-black{
     position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0.5;
+    opacity: 0.6;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -12,19 +12,20 @@
 
 .action-box{
     font-weight: 500;
-    border: 2px solid black;
+    border: 4px solid #000;
     width: 50%;
     border-collapse: collapse;
     background-color: #D26406;
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 25%;
 }
 
 td{
     border: 2px solid black;
-    padding: 20px;
+    padding: 5px;
     font-size: 150%;
+    width: 30%;
 }
 
 .action-intro{
@@ -39,4 +40,20 @@ td{
     width: 18%;
     left: 2%;
     top: 3%
+}
+
+.action-feed{
+    width: 25%;
+}
+
+.action-sex{
+    width: 40%;
+}
+
+.action-buy{
+    width: 30%;
+}
+
+.action-sell{
+    width: 40%;
 }

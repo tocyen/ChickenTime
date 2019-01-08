@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Season.css';
+import 'animate.css';
 import Spring from '../images/春天.png';
 import Summer from '../images/夏天.png';
 import Fall from '../images/秋天.png';
@@ -18,20 +19,19 @@ class Season extends Component{
     constructor(props){
         super(props)
         this.state={
-
         }
     }
 
-    changeSeason(){
-        setInterval()
+    componentDidMount(){
+        setInterval(() => this.props.changeSection(7), 3000)
     }
 
     render(){
         return(
             <div className="season-wrapper">
-                <div className="deco"></div>
-                <span className="seasontext">春天來了</span>
-                <img className="seasontime" src={Spring} alt="" />
+                <div className="deco animated zoomIn"></div>
+                <span className="seasontext animated zoomIn">春天來了</span>
+                <img className="seasontime animated zoomIn" src={Spring} alt="" />
             </div>
         )
     }
