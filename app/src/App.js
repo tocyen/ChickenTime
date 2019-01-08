@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSection: 1,
+      currentSection: 7,
       name: '',
       actiontime: 0,
     };

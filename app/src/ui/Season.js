@@ -22,6 +22,9 @@ class Season extends Component{
         }
     }
 
+    changeSeason(){
+        setInterval()
+    }
 
     render(){
         return(
