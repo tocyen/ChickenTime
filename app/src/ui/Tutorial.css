@@ -24,15 +24,16 @@ html, body{
     background-color: rgba(236, 236, 236, 0.9);
     border-radius: 5px;
     margin: 0 auto;
-    width: 60%;
+    width: 65%;
     position: fixed;
-    bottom: 30%;
+    bottom: 24%;
     left: 8%;
     letter-spacing: 2px;
     font-weight: 400;
-    padding: 15px;
+    padding: 20px;
     font-size: 18px;
     text-align:left;
+    text-align: start;
 }
 
 .nav-icon{
@@ -46,12 +47,43 @@ html, body{
     font-size: 30px;
     position: absolute;
     font-weight: 600;
-    left: 45%;
-    bottom: 120%;
+    left: 40%;
+    bottom: 102%;
 }
 
-.item{
+.item-title{
     text-align: center;
     font-size: 24px;
     font-weight: 500;
 }
+
+.npc{
+    width: 15%;
+    position: fixed;
+    top: 52%;
+    right: 5%;
+}
+
+.pic{
+    width: 20%;
+    display: inline-block;
+    margin-left: 15%;
+    vertical-align: middle;
+}
+
+.text{
+    display: inline-block;
+    width: 50%;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+/* .animalpic, .animal2pic{
+    width: 20%;
+} */
+
+.animal, .animal2{
+    display: inline-block;
+
+}
+

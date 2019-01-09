@@ -1,0 +1,77 @@
+.money-wrapper{
+    text-align: left;
+    padding-top: 20px;
+    display: inline-block;
+    width: 20%;
+}
+
+.money{
+    width: 20%;
+    vertical-align: bottom;
+}
+
+span{
+    font-size: 120%;
+    font-weight: 400;
+    padding-left: 10px;
+}
+
+.purchase-title{
+    font-size: 150%;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.item-list{
+    display: inline-block;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.item-list li{
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+}
+
+.item{
+    width: 60%;
+}
+
+.item-name{
+    text-align: center;
+    font-size: 150%;
+    font-weight: 400;
+}
+
+.item-num{
+    font-size: 150%;
+    font-weight: 400;
+}
+
+.item-button{
+    font-size: 100%;
+    font-weight: 400;
+    border: 3px solid black;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #D26406;
+    color: #fff;
+    padding: 5px;
+}
+
+ul{
+    margin: 0;
+}
+
+.startgame-button{
+    font-weight: 400;
+    font-size: 150%;
+    border: 3px solid black;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #41171A;
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 2%;
+}
+
