@@ -1,6 +1,25 @@
-const app = require('http').createServer(handler)
+const fs = require('fs');
+// ========= HTTPS ==========
+// const https = require('https');
+
+// const privateKey = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/privkey.pem', 'utf8');
+// const certificate = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/cert.pem', 'utf8');
+// const ca = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/chain.pem', 'utf8');
+
+// const app = https.createServer({
+//         key: privateKey,
+//         cert: certificate,
+//         ca: ca
+// }, handler);
+// ========= HTTPS ==========
+
+// ========== HTTP ==========
+const http = require('http');
+const app = http.createServer(handler)
+// ========== HTTP ==========
+
 const io = require('socket.io')(app);
-const { MD5 } = require('crypto-js');
+const moment = require('moment');
 
 app.listen(80);
 
@@ -69,5 +88,17 @@ function joinReq(data, id) {
 }
 
 function gameStartReq(data, id) {
-  
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  const admin = room.players.find(x => x.admin === true);
+  if (admin.uid !== id) return;
+
+  const next45Seconds = moment().add(45, 'seconds').toISOString();
+
+  room.started = true;
+  sendToRoom('ROUND_START', data.rid, {
+    rid: data.rid,
+    currentSeason: 'spring',
+    endTime: next45Seconds,
+  });
 }
