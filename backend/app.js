@@ -11,17 +11,19 @@ const fs = require('fs');
 //         cert: certificate,
 //         ca: ca
 // }, handler);
+// app.listen(443);
 // ========= HTTPS ==========
 
 // ========== HTTP ==========
 const http = require('http');
 const app = http.createServer(handler)
+app.listen(80);
 // ========== HTTP ==========
 
 const io = require('socket.io')(app);
 const moment = require('moment');
 
-app.listen(80);
+
 
 function handler (req, res) {
   res.writeHead(200);
