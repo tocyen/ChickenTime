@@ -46,9 +46,16 @@ io.on('connection', function (socket) {
   socket.on('ROUND_END_REQ', (data) => { roundEndReq(data, socket.id) });
   socket.on('PURCHASE_REQ', (data) => { purchaseReq(data, socket.id) });
   socket.on('ACTION_REQ', (data) => { actionReq(data, socket.id) });
+
+  socket.on('FEED_REQ', (data) => { feedReq(data, socket.id) });
+  socket.on('SEX_REQ', (data) => { sexReq(data, socket.id) });
+  socket.on('SELL_REQ', (data) => { sellReq(data, socket.id) });
+  socket.on('KILL_REQ', (data) => { killReq(data, socket.id) });
+  socket.on('SHOT_REQ', (data) => { shotReq(data, socket.id) });
 });
 
 function sendToUser(label, uid, data) {
+  console.log('[USER_STATUS]');
   io.of('/').connected[uid].emit(label, data);
 }
 
@@ -177,6 +184,7 @@ function purchaseReq(data, id) {
 
   const user = room.players.find(x => x.uid === id);
   if(!user || !data.item) return;
+  if (room.currentSeason >= 0 && user.actions.purchase <= 0) return;
 
   switch (data.item) {
     case 'knife':
@@ -229,7 +237,7 @@ function purchaseReq(data, id) {
     default:
       return;
   }
-
+  user.actions.purchase -= 1;
   sendToUser('USER_STATUS', user.uid, user);
   sendGlobalStatus(data.rid);
 }
@@ -295,4 +303,24 @@ function actionReq(data, id) {
       endTime: next45Seconds,
     });
   }
+}
+
+function feedReq(data, id) {
+
+}
+
+function sexReq(data, id) {
+
+}
+
+function sellReq(data, id) {
+
+}
+
+function killReq(data, id) {
+
+}
+
+function shotReq(data, id) {
+
 }
