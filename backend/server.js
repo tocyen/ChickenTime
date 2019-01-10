@@ -195,7 +195,7 @@ function purchaseReq(data, id) {
       break;
     case 'feed':
       if (1 <= user.money) {
-        user.money -= d1;
+        user.money -= 1;
         user.items.feed += 1;
       }
       break;
