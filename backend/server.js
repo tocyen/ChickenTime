@@ -42,9 +42,10 @@ io.on('connection', function (socket) {
   socket.on('CREATE_REQ', (data) => { createReq(data, socket.id) });
   socket.on('JOIN_REQ', (data) => { joinReq(data, socket.id) });
   socket.on('GAME_START_REQ', (data) => { gameStartReq(data, socket.id) });
-  socket.on('ROUND_START_REQ', (data) => { roundStartReq(data, socket.id) });
+  // socket.on('ROUND_START_REQ', (data) => { roundStartReq(data, socket.id) });
   socket.on('ROUND_END_REQ', (data) => { roundEndReq(data, socket.id) });
   socket.on('PURCHASE_REQ', (data) => { purchaseReq(data, socket.id) });
+  socket.on('ACTION_REQ', (data) => { actionReq(data, socket.id) });
 });
 
 function sendToUser(label, uid, data) {
@@ -87,7 +88,7 @@ function createReq(data, id) {
         uid: id,
         money: initialMoney,
         items: {knife: 0, shot: 0, feed: 0},
-        actions: [],
+        actions: {feed: 0, sex: 0, buy: 0, sell: 0},
         chickens: [],
         admin: true,
       },
@@ -112,7 +113,7 @@ function joinReq(data, id) {
       uid: id,
       money: initialMoney,
       items: {knife: 0, shot: 0, feed: 0},
-      actions: [],
+      actions: {feed: 0, sex: 0, buy: 0, sell: 0},
       chickens: [],
     });
     const roomStatus = {
@@ -130,46 +131,19 @@ function gameStartReq(data, id) {
   const admin = room.players.find(x => x.admin === true);
   if (admin.uid !== id) return;
 
-  room.timeout = setTimeout(() => {
-    sendToRoom('ROUND_END', data.rid, {
-      rid: data.rid,
-      nextSeason: 1,
-    });
-  }, 50 * 1000);
-  const next45Seconds = moment().add(45, 'seconds').toISOString();
+  // room.timeout = setTimeout(() => {
+  //   sendToRoom('ROUND_END', data.rid, {
+  //     rid: data.rid,
+  //     nextSeason: 1,
+  //   });
+  // }, 50 * 1000);
+  // const next45Seconds = moment().add(45, 'seconds').toISOString();
 
   room.started = true;
-  room.currentSeason = 0;
-  sendToRoom('ROUND_START', data.rid, {
+  room.currentSeason = -1;
+  sendToRoom('GAME_START', data.rid, {
     rid: data.rid,
-    currentSeason: 0,
-    endTime: next45Seconds,
-  });
-}
-
-function roundStartReq(data, id) {
-  const room = rooms.find(x => x.rid === data.rid);
-  if (!room) return;
-  console.log('[ROUND_START_REQ ' + data.rid + ']');
-  const admin = room.players.find(x => x.admin === true);
-  if (admin.uid !== id) return;
-
-  room.currentSeason += 1;
-  room.players.map(x => {
-    x.end = false;
-    delete x.end;
-  });
-  room.timeout = setTimeout(() => {
-    sendToRoom('ROUND_END', data.rid, {
-      rid: data.rid,
-      nextSeason: room.currentSeason + 1,
-    });
-  }, 50 * 1000);
-  const next45Seconds = moment().add(45, 'seconds').toISOString();
-
-  sendToRoom('ROUND_START', data.rid, {
-    rid: data.rid,
-    currentSeason: room.currentSeason,
+    currentSeason: -1,
     endTime: next45Seconds,
   });
 }
@@ -185,6 +159,10 @@ function roundEndReq(data, id) {
   if (room.players.filter(x => x.end === true).length === room.players.length) {
     clearTimeout(room.timeout);
     delete room.timeout;
+    room.players.map(user => {
+      user.end = false;
+      delete user.end;
+    });
     sendToRoom('ROUND_END', data.rid, {
       rid: data.rid,
       nextSeason: room.currentSeason + 1,
@@ -254,4 +232,67 @@ function purchaseReq(data, id) {
 
   sendToUser('USER_STATUS', user.uid, user);
   sendGlobalStatus(data.rid);
+}
+
+function actionReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[ACTION_REQ ' + data.rid + ']');
+
+  const user = room.players.find(x => x.uid === id);
+  switch (data.item) {
+    case 'feed':
+    case 'sex':
+    case 'purchase':
+    case 'sell':
+      user.actionEnd = data.item;
+      break;
+    default:
+      return;
+  }
+
+  if (room.players.filter(x => x.actionEnd).length === room.players.length) {
+    const feedUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'feed');
+    const sexUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sec');
+    const purchaseUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'purchase');
+    const sellUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sell');
+
+    if (feedUser.length > 0) {
+      feedUser.map(user => { user.actions.feed += (24 / feedUser.length); });
+    }
+    if (sexUser.length > 0) {
+      sexUser.map(user => { user.actions.sex += (24 / sexUser.length); });
+    }
+    if (purchaseUser.length > 0) {
+      purchaseUser.map(user => { user.actions.purchase += (24 / purchaseUser.length); });
+    }
+    if (sellUser.length > 0) {
+      sellUser.map(user => { user.actions.sell += (24 / sellUser.length); });
+    }
+
+    room.players.map(user => {
+      user.actionEnd = false;
+      delete user.actionEnd;
+      sendToUser('USER_STATUS', user.uid, user);
+    });
+
+    room.currentSeason += 1;
+    room.players.map(x => {
+      x.end = false;
+      delete x.end;
+    });
+    room.timeout = setTimeout(() => {
+      sendToRoom('ROUND_END', data.rid, {
+        rid: data.rid,
+        nextSeason: room.currentSeason + 1,
+      });
+    }, 50 * 1000);
+    const next45Seconds = moment().add(45, 'seconds').toISOString();
+
+    sendToRoom('ROUND_START', data.rid, {
+      rid: data.rid,
+      currentSeason: room.currentSeason,
+      endTime: next45Seconds,
+    });
+  }
 }
