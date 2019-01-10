@@ -28,7 +28,7 @@ class Create extends Component{
             }
         });
 
-        this.props.socket.on('ROUND_START', ()=>{
+        this.props.socket.on('GAME_START', ()=>{
             this.props.changeSection(4)
         })
     }

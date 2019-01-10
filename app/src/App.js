@@ -18,7 +18,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSection: 4,
+      currentSection: 0,
       name: '',
       roomstatus: {},
     };
@@ -55,7 +55,7 @@ class App extends Component {
       {this.state.currentSection === 2 ? <Create socket={socket} changeSection={this.changeSection} roomstatus={this.state.roomstatus} updateRoomID={this.updateRoomID} name={this.state.name}/> : null}
       {this.state.currentSection === 3 ? <Join socket={socket} changeSection={this.changeSection} name={this.state.name}/> : null}
       {this.state.currentSection === 4 ? <Tutorial changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 5 ? <Purchase changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 5 ? <Purchase socket={socket} changeSection={this.changeSection} roomstatus={this.state.roomstatus}/> : null}
       {this.state.currentSection === 6 ? <Season changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 7 ? <Action changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 8 ? <SelectedAction changeSection={this.changeSection}/> : null}

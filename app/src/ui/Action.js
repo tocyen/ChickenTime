@@ -11,6 +11,7 @@ class Action extends Component{
     constructor(props){
         super(props)
         this.state={
+            clickAction: true,
             feedTime: 0,
             sextime: 0,
             purchasetime: 0,
@@ -20,57 +21,47 @@ class Action extends Component{
 
     }
 
-    clickAction(e){
-        const value = e.target.value
-        console.log(value)
-    }
-
-    conductActionTime(){
-            const randomlist =[]
-            for(var i=0; i<4; i++){
-            randomlist.push(Math.floor(Math.random()*15)+1)
-            }
-            console.log(randomlist[0])
-            this.setState({
-            feedtime: randomlist[0],
-            sextime: randomlist[1],
-            purshasetime: randomlist[2],
-            selltime: randomlist[3],
-            })
-
+    clickAction(){
+        this.setState=({
+            clickAction: false,
+        })
     }
 
     componentWillMount(){
-        this.conductActionTime()
     }
 
     render(){
         return(
             <div className="action-wrapper">
                 <div className="opacity-black">
+
+                {
+                    this.state.clickAction ?
                     <div className="action-intro">請選擇您本回合要進行的行動</div>
+                    : <div className="action-intro">請等待其他玩家選擇行動</div>
+                }
                     <img className="bomb animated infinite flash" src={Countdown} alt="" />
                     <table className="action-box">
                         <tr>
                             <td onClick={this.clickAction}>
-                                餵食 {this.state.feedtime} 次
+                                餵食
                                 <br/>
                                 <img className="action-feed" src={Feed} alt="" />
                             </td>
                             <td>
-                                交配 {this.state.sextime} 次
+                                交配
                                 <br/>
                                 <img className="action-sex" src={Sex} alt="" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                購買 {this.state.purchasetime} 次
+                                購買
                                 <br/>
                                 <img className="action-buy" src={Buy} alt="" />
                             </td>
                             <td>
-                                販賣 {this.state.selltime} 次
+                                販賣
                                 <br/>
                                 <img className="action-sell" src={Sell} alt="" />
                             </td>
