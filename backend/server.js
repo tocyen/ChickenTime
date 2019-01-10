@@ -144,7 +144,7 @@ function gameStartReq(data, id) {
   sendToRoom('GAME_START', data.rid, {
     rid: data.rid,
     currentSeason: -1,
-    endTime: next45Seconds,
+    // endTime: next45Seconds,
   });
 }
 
