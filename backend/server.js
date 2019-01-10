@@ -168,6 +168,11 @@ function roundEndReq(data, id) {
     delete room.timeout;
     room.players.map(user => {
       user.end = false;
+      user.chickens.map(c => {
+        if (!c.shot && Math.random() > 0.9) {
+          c.sick = true;
+        };
+      });
       delete user.end;
     });
     sendToRoom('ROUND_END', data.rid, {
