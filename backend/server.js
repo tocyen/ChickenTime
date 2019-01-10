@@ -9,9 +9,9 @@ if (process.env.https) {
   const ca = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/chain.pem', 'utf8');
 
   app = https.createServer({
-          key: privateKey,
-          cert: certificate,
-          ca: ca
+    key: privateKey,
+    cert: certificate,
+    ca: ca
   }, handler);
   app.listen(443, () => {
     console.log('ChickenTime server started.');
@@ -29,7 +29,7 @@ const moment = require('moment');
 
 
 
-function handler (req, res) {
+function handler(req, res) {
   res.writeHead(200);
   res.end();
 }
@@ -69,7 +69,7 @@ function sendToRoom(label, roomId, data) {
   });
 }
 
-function sendGlobalStatus(roomId){
+function sendGlobalStatus(roomId) {
   const room = rooms.find(x => x.rid === roomId);
 
   const globalStat = room.players.map(x => ({
@@ -82,7 +82,7 @@ function sendGlobalStatus(roomId){
 }
 
 function createReq(data, id) {
-  if( !data.name ) return;
+  if (!data.name) return;
   console.log('[CREATE_REQ]');
   const rid = `${Math.floor(Math.random() * 10000)}`.padStart(4, '0');
   const newRoom = {
@@ -94,8 +94,8 @@ function createReq(data, id) {
         name: data.name,
         uid: id,
         money: initialMoney,
-        items: {knife: 0, shot: 0, feed: 0},
-        actions: {feed: 0, sex: 0, buy: 0, sell: 0},
+        items: { knife: 0, shot: 0, feed: 0 },
+        actions: { feed: 0, sex: 0, buy: 0, sell: 0 },
         chickens: [],
         admin: true,
       },
@@ -113,14 +113,14 @@ function joinReq(data, id) {
   if (!data.name) return;
   console.log('[JOIN_REQ]');
   const room = rooms.find(x => x.rid === data.rid);
-  if(room){
+  if (room) {
     if (room.players.find(x => x.uid === id)) return;
     room.players.push({
       name: data.name,
       uid: id,
       money: initialMoney,
-      items: {knife: 0, shot: 0, feed: 0},
-      actions: {feed: 0, sex: 0, buy: 0, sell: 0},
+      items: { knife: 0, shot: 0, feed: 0 },
+      actions: { feed: 0, sex: 0, buy: 0, sell: 0 },
       chickens: [],
     });
     const roomStatus = {
@@ -183,7 +183,7 @@ function purchaseReq(data, id) {
   console.log('[PURCHASE REQ]');
 
   const user = room.players.find(x => x.uid === id);
-  if(!user || !data.item) return;
+  if (!user || !data.item) return;
   if (room.currentSeason >= 0 && user.actions.purchase <= 0) return;
 
   switch (data.item) {
@@ -238,7 +238,7 @@ function purchaseReq(data, id) {
     default:
       return;
   }
-  if (room.currentSeason >=0) user.actions.purchase -= 1;
+  if (room.currentSeason >= 0) user.actions.purchase -= 1;
   sendToUser('USER_STATUS', user.uid, user);
   sendGlobalStatus(data.rid);
 }
@@ -312,17 +312,17 @@ function feedReq(data, id) {
   console.log('[FEED_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
-  if(!user || !data.cid) return;
+  if (!user || !data.cid) return;
 
-  if(user.items.feed <=0 || user.actions.feed <= 0) return;
+  if (user.items.feed <= 0 || user.actions.feed <= 0) return;
 
   const chick = user.chickens.find(x => x.cid === data.cid);
-  if(!chick) return;
-  if(chick.size === 'L') return;
+  if (!chick) return;
+  if (chick.size === 'L') return;
 
-  if(chick.size === 'S') {
+  if (chick.size === 'S') {
     chick.size = 'M';
-  } else if(chick.size === 'M') {
+  } else if (chick.size === 'M') {
     chick.size = 'L';
   }
   user.actions.feed -= 1;
@@ -345,6 +345,30 @@ function sellReq(data, id) {
   console.log('[SELL_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
+  if (!user || !data.cid) return;
+  if (user.actions.sell <= 0) return;
+
+  const chick = user.chickens.find(x => x.cid === data.cid);
+  if (!chick) return;
+
+  switch (chick.size) {
+    case 'S':
+      user.money += 4;
+      break;
+    case 'M':
+      user.money += 8;
+      break;
+    case 'L':
+      user.money += 13;
+      break;
+    default:
+      return;
+  }
+  user.chickens = user.chickens.filter(x => x.cid !== data.cid);
+
+  user.actions.sell -= 1;
+  sendToUser('USER_STATUS', id, user);
+  sendGlobalStatus(data.rid);
 }
 
 function killReq(data, id) {
@@ -353,12 +377,12 @@ function killReq(data, id) {
   console.log('[KILL_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
-  if(!user || !data.cid) return;
+  if (!user || !data.cid) return;
 
-  if(user.items.knife <=0) return;
+  if (user.items.knife <= 0) return;
 
   const chick = user.chickens.find(x => x.cid === data.cid);
-  if(!chick) return;
+  if (!chick) return;
 
   user.chicken = user.chicken.filter(x => x.cid !== data.cid);
 
