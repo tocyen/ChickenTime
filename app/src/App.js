@@ -57,7 +57,7 @@ class App extends Component {
       {this.state.currentSection === 4 ? <Tutorial changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 5 ? <Purchase socket={socket} changeSection={this.changeSection} roomstatus={this.state.roomstatus}/> : null}
       {this.state.currentSection === 6 ? <Season changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 7 ? <Action changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 7 ? <Action socket={socket} changeSection={this.changeSection} roomstatus={this.state.roomstatus}/> : null}
       {this.state.currentSection === 8 ? <SelectedAction changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 9 ? <Main changeSection={this.changeSection}/> : null}
       </div>
