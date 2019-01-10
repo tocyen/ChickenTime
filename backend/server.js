@@ -31,6 +31,7 @@ function handler (req, res) {
 }
 
 const rooms = [];
+const initialMoney = 45;
 
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
@@ -39,14 +40,20 @@ io.on('connection', function (socket) {
   socket.on('GAME_START_REQ', (data) => { gameStartReq(data, socket.id) });
   socket.on('ROUND_START_REQ', (data) => { roundStartReq(data, socket.id) });
   socket.on('ROUND_END_REQ', (data) => { roundEndReq(data, socket.id) });
+  socket.on('PURCHASE_REQ', (data) => { purchaseReq(data, socket.id) });
 });
+
+function sendToUser(label, uid, data) {
+  io.of('/').connected[uid].emit(label, data);
+}
 
 function sendToRoom(label, roomId, data) {
   const room = rooms.find(x => x.rid === roomId);
   // io.sockets.socket(clientId).emit('ROOM_STATUS', roomStatus);
   console.log('[' + label + ' ' + roomId + ']')
   Array.from(room.players.map(x => x.uid)).forEach((user) => {
-    io.of('/').connected[user].emit(label, data);
+    sendToUser(label, user, data);
+    // io.of('/').connected[user].emit(label, data);
   });
 }
 
@@ -62,6 +69,10 @@ function createReq(data, id) {
       {
         name: data.name,
         uid: id,
+        money: initialMoney,
+        items: {knife: 0, shot: 0, feed: 0},
+        actions: [],
+        chickens: [],
         admin: true,
       },
     ]
@@ -82,7 +93,11 @@ function joinReq(data, id) {
     if (room.players.find(x => x.uid === id)) return;
     room.players.push({
       name: data.name,
-      uid: id
+      uid: id,
+      money: initialMoney,
+      items: {knife: 0, shot: 0, feed: 0},
+      actions: [],
+      chickens: [],
     });
     const roomStatus = {
       rid: data.rid,
@@ -159,4 +174,38 @@ function roundEndReq(data, id) {
       nextSeason: room.currentSeason + 1,
     });
   }
+}
+
+function purchaseReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[PURCHASE REQ]');
+
+  const user = room.players.find(x => x.uid === id);
+  if(!user || !data.item || !data.length) return;
+
+  switch (data.item) {
+    case 'knife':
+      if (3 * data.length <= user.money) {
+        user.money -= 3 * data.length;
+        user.items.knife += data.length;
+      }
+      break;
+    case 'feed':
+      if (data.length <= user.money) {
+        user.money -= data.length;
+        user.items.feed += data.length;
+      }
+      break;
+    case 'shot':
+      if (data.length <= user.money) {
+        user.money -= data.length;
+        user.items.shot += data.length;
+      }
+      break;
+    default:
+      return;
+  }
+
+  sendToUser('USER_STATUS', user.uid, user);
 }
