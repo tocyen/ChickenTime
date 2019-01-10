@@ -269,7 +269,7 @@ function actionReq(data, id) {
 
   if (room.players.filter(x => x.actionEnd).length === room.players.length) {
     const feedUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'feed');
-    const sexUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sec');
+    const sexUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sex');
     const purchaseUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'purchase');
     const sellUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sell');
 
