@@ -401,4 +401,14 @@ function shotReq(data, id) {
   console.log('[SHOT_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
+  if (!user || !data.cid) return;
+
+  if (user.items.shot <= 0) return;
+
+  const chick = user.chickens.find(x => x.cid === data.cid);
+  if (!chick || chick.shot) return;
+
+  chick.shot = true;
+  user.items.shot -= 1;
+  sendToUser('USER_STATUS', id, user);
 }
