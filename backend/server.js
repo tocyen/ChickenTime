@@ -37,11 +37,15 @@ io.on('connection', function (socket) {
   socket.on('CREATE_REQ', (data) => { createReq(data, socket.id) });
   socket.on('JOIN_REQ', (data) => { joinReq(data, socket.id) });
   socket.on('GAME_START_REQ', (data) => { gameStartReq(data, socket.id) });
+  socket.on('ROUND_START_REQ', (data) => { roundStartReq(data, socket.id) });
+  socket.on('ROUND_END_REQ', (data) => { roundEndReq(data, socket.id) });
 });
 
 function sendToRoom(label, roomId, data) {
   const room = rooms.find(x => x.rid === roomId);
   // io.sockets.socket(clientId).emit('ROOM_STATUS', roomStatus);
+  console.log('[' + label + ' ' + roomId + ']')
+  console.log(data)
   Array.from(room.players.map(x => x.uid)).forEach((user) => {
     io.of('/').connected[user].emit(label, data);
   });
@@ -92,15 +96,70 @@ function joinReq(data, id) {
 function gameStartReq(data, id) {
   const room = rooms.find(x => x.rid === data.rid);
   if (!room) return;
+  console.log('[GAME_START_REQ ' + data.rid + ']');
   const admin = room.players.find(x => x.admin === true);
   if (admin.uid !== id) return;
 
+  room.timeout = setTimeout(() => {
+    sendToRoom('ROUND_END', data.rid, {
+      rid: data.rid,
+      nextSeason: 1,
+    });
+  }, 50 * 1000);
   const next45Seconds = moment().add(45, 'seconds').toISOString();
 
   room.started = true;
+  room.currentSeason = 0;
   sendToRoom('ROUND_START', data.rid, {
     rid: data.rid,
-    currentSeason: 'spring',
+    currentSeason: 0,
     endTime: next45Seconds,
   });
+}
+
+function roundStartReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[ROUND_START_REQ ' + data.rid + ']');
+  const admin = room.players.find(x => x.admin === true);
+  if (admin.uid !== id) return;
+
+  room.currentSeason += 1;
+  room.players.map(x => {
+    x.end = false;
+    delete x.end;
+  });
+  room.timeout = setTimeout(() => {
+    sendToRoom('ROUND_END', data.rid, {
+      rid: data.rid,
+      nextSeason: room.currentSeason + 1,
+    });
+  }, 50 * 1000);
+  const next45Seconds = moment().add(45, 'seconds').toISOString();
+
+  sendToRoom('ROUND_START', data.rid, {
+    rid: data.rid,
+    currentSeason: room.currentSeason,
+    endTime: next45Seconds,
+  });
+}
+
+function roundEndReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[ROUND_END_REQ ' + data.rid + ']');
+
+  const user = room.players.find(x => x.uid === id);
+  user.end = true;
+
+  console.log(room);
+
+  if (room.players.filter(x => x.end === true).length === room.players.length) {
+    clearTimeout(room.timeout);
+    delete room.timeout;
+    sendToRoom('ROUND_END', data.rid, {
+      rid: data.rid,
+      nextSeason: room.currentSeason + 1,
+    });
+  }
 }
