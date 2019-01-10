@@ -13,11 +13,15 @@ if (process.env.https) {
           cert: certificate,
           ca: ca
   }, handler);
-  app.listen(443);
+  app.listen(443, () => {
+    console.log('ChickenTime server started.');
+  });
 } else {
   const http = require('http');
   app = http.createServer(handler)
-  app.listen(80);
+  app.listen(80, () => {
+    console.log('ChickenTime server started.');
+  });
 }
 
 const io = require('socket.io')(app);
