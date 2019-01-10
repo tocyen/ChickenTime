@@ -1,24 +1,24 @@
 const fs = require('fs');
-// ========= HTTPS ==========
-// const https = require('https');
 
-// const privateKey = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/privkey.pem', 'utf8');
-// const certificate = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/cert.pem', 'utf8');
-// const ca = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/chain.pem', 'utf8');
+let app;
+if (process.env.https) {
+  const https = require('https');
 
-// const app = https.createServer({
-//         key: privateKey,
-//         cert: certificate,
-//         ca: ca
-// }, handler);
-// app.listen(443);
-// ========= HTTPS ==========
+  const privateKey = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/cert.pem', 'utf8');
+  const ca = fs.readFileSync('/etc/letsencrypt/live/nuk.noob.tw/chain.pem', 'utf8');
 
-// ========== HTTP ==========
-const http = require('http');
-const app = http.createServer(handler)
-app.listen(80);
-// ========== HTTP ==========
+  app = https.createServer({
+          key: privateKey,
+          cert: certificate,
+          ca: ca
+  }, handler);
+  app.listen(443);
+} else {
+  const http = require('http');
+  app = http.createServer(handler)
+  app.listen(80);
+}
 
 const io = require('socket.io')(app);
 const moment = require('moment');
