@@ -61,6 +61,18 @@ function sendToRoom(label, roomId, data) {
   });
 }
 
+function sendGlobalStatus(roomId){
+  const room = rooms.find(x => x.rid === roomId);
+
+  const globalStat = room.players.map(x => ({
+    name: x.name,
+    uid: x.uid,
+    money: x.money,
+  }));
+
+  sendToRoom('GLOBAL_STATUS', roomId, globalStat);
+}
+
 function createReq(data, id) {
   if( !data.name ) return;
   console.log('[CREATE_REQ]');
@@ -212,4 +224,5 @@ function purchaseReq(data, id) {
   }
 
   sendToUser('USER_STATUS', user.uid, user);
+  sendGlobalStatus(data.rid);
 }
