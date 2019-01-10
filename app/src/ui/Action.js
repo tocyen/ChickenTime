@@ -32,6 +32,7 @@ class Action extends Component{
     }
 
     action_feed(){
+        console.log(this.state.roomstatus.rid)
         this.props.socket.emit('ACTION_REQ', {
             rid: this.state.roomstatus.rid,
             action: this.state.action[0]
