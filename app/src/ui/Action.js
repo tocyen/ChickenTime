@@ -10,7 +10,7 @@ import Sell from '../images/販賣.png'
 class Action extends Component{
     constructor(props){
         super(props)
-        this.state={
+        this.state=({
             userstatus:{
 
             },
@@ -22,7 +22,7 @@ class Action extends Component{
                 'purcahse',
                 'sell',
             ]
-        }
+        })
     }
 
     componentWillMount(){
