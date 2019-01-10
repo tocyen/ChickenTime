@@ -283,7 +283,7 @@ function actionReq(data, id) {
     }
     if (purchaseUser.length > 0) {
       const maxSize = Math.floor(Math.random() * 24) + 1;
-      purchaseUser.map(user => { user.actions.purchase += Math.floor(maxSize / purchaseUser.length); });
+      purchaseUser.map(user => { user.actions.buy += Math.floor(maxSize / purchaseUser.length); });
     }
     if (sellUser.length > 0) {
       const maxSize = Math.floor(Math.random() * 24) + 1;
