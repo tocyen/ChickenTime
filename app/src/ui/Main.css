@@ -1,0 +1,73 @@
+.main-money{
+    width: 5%;
+    vertical-align: bottom;
+}
+
+.navbar span{
+    font-size: 180%;
+    padding-left: 5%;
+}
+
+.navbar{
+    padding: 16px;
+    text-align: left;
+}
+
+.main-countdown{
+    width: 8%;
+    vertical-align: bottom;
+}
+
+.farm{
+    margin-top: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.chickhouse td{
+    width: 60px;
+    height: 60px;
+}
+
+.chickhouse{
+    background-color: antiquewhite;
+    border-collapse: collapse;
+    border-spacing: 0;
+    position: relative;
+    z-index: -1;
+}
+
+.chickhouse, td{
+    border: 3px solid black;
+    border-radius: 10px;
+    -moz-border-radius: 5px;
+    padding: 5px;
+}
+
+.Smale{
+    /* width: 10%; */
+    height: 32%;
+    position: absolute;
+    top: 66%;
+    left: 62%;
+}
+
+.Mfemale{
+    height: 72%;
+    position: absolute;
+    left: 58%;
+    top: -6%;
+}
+
+.Bmale{
+    height: 100%;
+    position: absolute;
+    left: 2%;
+}
+
+.eggs{
+    width: 20%;
+    position: absolute;
+    top: 65%;
+    left: 80%;
+}

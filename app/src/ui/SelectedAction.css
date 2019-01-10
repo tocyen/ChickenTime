@@ -8,7 +8,7 @@
 .choose{
     font-size: 150%;
     font-weight: 400;
-    padding-top: 10%;
+    padding-top: 6%;
 }
 
 .choose-box{
@@ -19,4 +19,10 @@
     font-weight: 400;
     padding: 20px;
     margin-top: 5%;
+}
+
+.choose-action{
+    width: 16%;
+    display: inline-block;
+    margin-top: 5%;;
 }

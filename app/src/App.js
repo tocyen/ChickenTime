@@ -9,22 +9,22 @@ import Action from './ui/Action'
 import Season from './ui/Season'
 import Join from './ui/Join'
 import SelectedAction from './ui/SelectedAction'
+import Main from './ui/Main'
+import openSocket from 'socket.io-client';
+const socket = openSocket('https://nuk.noob.tw/');
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSection: 8,
+      currentSection: 0,
       name: '',
-      actiontime: 0,
-      feedtime: 0,
-      feedtime: 0,
-      purshasetime: 0,
-      selltime: 0,
+      roomstatus: {},
     };
     this.updateName = this.updateName.bind(this)
     this.changeSection = this.changeSection.bind(this)
+    this.updateRoomID = this.updateRoomID.bind(this)
   }
 
   async changeSection(r){
@@ -38,16 +38,10 @@ class App extends Component {
     });
   }
 
-  conductActionTime(){
-    for(var i=0; i<10; i++){
-      const randomNum = Math.floor(Math.random()*10+1)
-      this.setState({
-        feedtime: randomNum,
-        feedtime: randomNum,
-        purshasetime: randomNum,
-        selltime: randomNum,
-      })
-    }
+  updateRoomID(ROOM_STATUS){
+    this.setState({
+      roomstatus: ROOM_STATUS,
+    })
   }
 
   render() {
@@ -57,14 +51,15 @@ class App extends Component {
 
 
       {this.state.currentSection === 0 ? <Name updateName={this.updateName} /> : null}
-      {this.state.currentSection === 1 ? <Room name={this.state.name} changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 2 ? <Create changeSection={this.changeSection}/> : null}
-      {this.state.currentSection === 3 ? <Join changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 1 ? <Room socket={socket} updateRoomID={this.updateRoomID} name={this.state.name} changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 2 ? <Create socket={socket} changeSection={this.changeSection} roomstatus={this.state.roomstatus}/> : null}
+      {this.state.currentSection === 3 ? <Join socket={socket} changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 4 ? <Tutorial changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 5 ? <Purchase changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 6 ? <Season changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 7 ? <Action changeSection={this.changeSection}/> : null}
       {this.state.currentSection === 8 ? <SelectedAction changeSection={this.changeSection}/> : null}
+      {this.state.currentSection === 9 ? <Main changeSection={this.changeSection}/> : null}
       </div>
     );
 

@@ -27,7 +27,7 @@ class Name extends Component{
         <div className="login page">
             <div className="form">
               <h2>最佳時雞</h2>
-              <input className="usrinput" type="text" placeholder="Enter your Name" value={this.state.name} onChange={this.onChange}/>
+              <input className="usrinput" type="text" placeholder="Enter your Name"  onChange={this.onChange}/>
               <ul className="confirm">
                 <li className="confirm-button" onClick={this.inputName}><p>確認</p></li>
               </ul>
