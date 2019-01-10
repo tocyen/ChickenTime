@@ -237,7 +237,7 @@ function purchaseReq(data, id) {
     default:
       return;
   }
-  user.actions.purchase -= 1;
+  if (room.currentSeason >=0) user.actions.purchase -= 1;
   sendToUser('USER_STATUS', user.uid, user);
   sendGlobalStatus(data.rid);
 }
