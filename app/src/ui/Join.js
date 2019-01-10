@@ -33,7 +33,7 @@ class Join extends Component{
         return(
         <div className="Join-wrapper">
             <div className="join-box">
-                <input className="roomcode" type="text" placeholder="Enter Room code" onChange={this.onChange}/>
+                <input autofocus className="roomcode" type="text" placeholder="Enter Room code" onChange={this.onChange}/>
                 <ul className="confirm">
                     <li className="confirm-button" onClick={()=> {this.join_req()}}><p>確認</p></li>
                 </ul>
