@@ -227,7 +227,7 @@ function purchaseReq(data, id) {
       break;
     case 'chick_l':
       if (15 <= user.money) {
-        user.money -= 16;
+        user.money -= 15;
         user.chickens.push({
           size: 'L',
           gender: (Math.random() <= 0.5 ? 'M' : 'F'),
