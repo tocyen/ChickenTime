@@ -13,36 +13,7 @@ class Main extends Component{
         this.state = {
             showStatus: false,
         };
-        this.Bstatus = this.Bstatus.bind(this)
-        this.Mstatus = this.Mstatus.bind(this)
-        this.Sstatus = this.Sstatus.bind(this)
-        this.Estatus = this.Estatus.bind(this)
       }
-
-    Bstatus(){
-        this.setState({
-            showStatus: !this.state.showStatus
-        })
-    }
-
-    Mstatus(){
-        this.setState({
-            showStatus: !this.state.showStatus
-        })
-    }
-
-    Sstatus(){
-        this.setState({
-            showStatus: !this.state.showStatus
-        })
-    }
-
-    Estatus(){
-        this.setState({
-            showStatus: !this.state.showStatus
-        })
-    }
-
 
 
     render(){
@@ -57,10 +28,10 @@ class Main extends Component{
                 </div>
 
                 <div className="farm">
-                    <img className="eggs" src={Eggs} alt=""  onClick={()=>{this.Estatus()}}/>
-                    <img className="Smale" src={Smale} alt="" onClick={()=>{this.Sstatus()}}/>
-                    <img className="Mfemale" src={Mfemale} alt="" onClick={()=>{this.Mstatus()}}/>
-                    <img className="Bmale" src={Bmale} alt=""  onClick={()=>{this.Bstatus()}}/>
+                    <img className="eggs" src={Eggs} alt=""  onClick={()=>{}}/>
+                    <img className="Smale" src={Smale} alt="" onClick={()=>{}}/>
+                    <img className="Mfemale" src={Mfemale} alt="" onClick={()=>{}}/>
+                    <img className="Bmale" src={Bmale} alt=""  onClick={()=>{}}/>
                     <table className="chickhouse">
                         <tr>
                             <td></td>

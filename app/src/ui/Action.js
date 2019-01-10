@@ -21,13 +21,26 @@ class Action extends Component{
                 'sex',
                 'purcahse',
                 'sell',
-            ]
+            ],
+            showSelected: false,
         }
     }
 
     componentDidMount(){
         this.setState({
             roomstatus: this.props.roomstatus,
+        })
+
+        this.props.socket.on('USER_STATUS', (userStatus)=>{
+            console.log(userStatus)
+            this.setState({
+                userstatus: userStatus,
+            })
+        })
+
+        this.props.socket.on('ROUND_START', (data)=>{
+            console.log(data)
+            this.props.changeSection(8)
         })
     }
 
@@ -59,19 +72,6 @@ class Action extends Component{
             action: this.state.action[3]
         })
     }
-
-    componentDidMount(){
-        this.props.socket.on('USER_STATUS', (userStatus)=>{
-            this.setState({
-                userstatus: userStatus,
-            })
-        })
-
-        this.props.socket.on('ROUND_START', ()=>{
-            this.props.changeSection(7)
-        })
-    }
-
 
     clickAction(){
         this.setState({

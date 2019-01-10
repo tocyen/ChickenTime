@@ -9,7 +9,7 @@ import Sell from '../images/販賣.png'
 class SelectedAction extends Component{
 
     componentDidMount(){
-        setInterval(() => this.props.changeSection(9), 3000)
+        setTimeout(() => this.props.changeSection(9), 3000)
     }
     render(){
         return(
