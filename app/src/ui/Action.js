@@ -10,7 +10,7 @@ import Sell from '../images/販賣.png'
 class Action extends Component{
     constructor(props){
         super(props)
-        this.state=({
+        this.state={
             userstatus:{
 
             },
@@ -22,10 +22,10 @@ class Action extends Component{
                 'purcahse',
                 'sell',
             ]
-        })
+        }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.setState({
             roomstatus: this.props.roomstatus,
         })
@@ -77,9 +77,6 @@ class Action extends Component{
         this.setState({
             clickAction: false,
         })
-    }
-
-    componentWillMount(){
     }
 
     render(){
