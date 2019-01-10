@@ -234,6 +234,7 @@ function purchaseReq(data, id) {
           shot: false
         });
       }
+      break;
     default:
       return;
   }
