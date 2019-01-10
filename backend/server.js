@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
 
 function sendToUser(label, uid, data) {
   console.log('[USER_STATUS]');
-  io.of('/').connected[uid].emit(label, data);
+  if(io.of('/').connected[uid]) io.of('/').connected[uid].emit(label, data);
 }
 
 function sendToRoom(label, roomId, data) {
