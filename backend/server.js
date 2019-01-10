@@ -254,12 +254,12 @@ function actionReq(data, id) {
   console.log('[ACTION_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
-  switch (data.item) {
+  switch (data.action) {
     case 'feed':
     case 'sex':
     case 'purchase':
     case 'sell':
-      user.actionEnd = data.item;
+      user.actionEnd = data.action;
       break;
     default:
       return;
