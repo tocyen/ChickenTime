@@ -272,16 +272,20 @@ function actionReq(data, id) {
     const sellUser = room.players.filter(x => x.actionEnd && x.actionEnd === 'sell');
 
     if (feedUser.length > 0) {
-      feedUser.map(user => { user.actions.feed += (24 / feedUser.length); });
+      const maxSize = Math.floor(Math.random() * 24) + 1;
+      feedUser.map(user => { user.actions.feed += Math.floor(maxSize / feedUser.length); });
     }
     if (sexUser.length > 0) {
-      sexUser.map(user => { user.actions.sex += (24 / sexUser.length); });
+      const maxSize = Math.floor(Math.random() * 24) + 1;
+      sexUser.map(user => { user.actions.sex += Math.floor(maxSize / sexUser.length); });
     }
     if (purchaseUser.length > 0) {
-      purchaseUser.map(user => { user.actions.purchase += (24 / purchaseUser.length); });
+      const maxSize = Math.floor(Math.random() * 24) + 1;
+      purchaseUser.map(user => { user.actions.purchase += Math.floor(maxSize / purchaseUser.length); });
     }
     if (sellUser.length > 0) {
-      sellUser.map(user => { user.actions.sell += (24 / sellUser.length); });
+      const maxSize = Math.floor(Math.random() * 24) + 1;
+      sellUser.map(user => { user.actions.sell += Math.floor(maxSize / sellUser.length); });
     }
 
     room.players.map(user => {
