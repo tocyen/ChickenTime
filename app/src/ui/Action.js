@@ -22,7 +22,8 @@ class Action extends Component{
     }
 
     clickAction(){
-        this.setState=({
+        console.log('gay')
+        this.setState({
             clickAction: false,
         })
     }
@@ -42,30 +43,32 @@ class Action extends Component{
                 }
                     <img className="bomb animated infinite flash" src={Countdown} alt="" />
                     <table className="action-box">
-                        <tr>
-                            <td onClick={this.clickAction}>
-                                餵食
-                                <br/>
-                                <img className="action-feed" src={Feed} alt="" />
-                            </td>
-                            <td>
-                                交配
-                                <br/>
-                                <img className="action-sex" src={Sex} alt="" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                購買
-                                <br/>
-                                <img className="action-buy" src={Buy} alt="" />
-                            </td>
-                            <td>
-                                販賣
-                                <br/>
-                                <img className="action-sell" src={Sell} alt="" />
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td onClick={this.clickAction}>
+                                    餵食
+                                    <br/>
+                                    <img className="action-feed" src={Feed} alt="" />
+                                </td>
+                                <td>
+                                    交配
+                                    <br/>
+                                    <img className="action-sex" src={Sex} alt="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    購買
+                                    <br/>
+                                    <img className="action-buy" src={Buy} alt="" />
+                                </td>
+                                <td>
+                                    販賣
+                                    <br/>
+                                    <img className="action-sell" src={Sell} alt="" />
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
