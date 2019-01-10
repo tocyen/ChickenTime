@@ -45,7 +45,6 @@ function sendToRoom(label, roomId, data) {
   const room = rooms.find(x => x.rid === roomId);
   // io.sockets.socket(clientId).emit('ROOM_STATUS', roomStatus);
   console.log('[' + label + ' ' + roomId + ']')
-  console.log(data)
   Array.from(room.players.map(x => x.uid)).forEach((user) => {
     io.of('/').connected[user].emit(label, data);
   });
@@ -151,8 +150,6 @@ function roundEndReq(data, id) {
 
   const user = room.players.find(x => x.uid === id);
   user.end = true;
-
-  console.log(room);
 
   if (room.players.filter(x => x.end === true).length === room.players.length) {
     clearTimeout(room.timeout);
