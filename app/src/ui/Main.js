@@ -26,16 +26,23 @@ class Main extends Component{
     }
 
     Mstatus(){
-
+        this.setState({
+            showStatus: !this.state.showStatus
+        })
     }
 
     Sstatus(){
-
+        this.setState({
+            showStatus: !this.state.showStatus
+        })
     }
 
     Estatus(){
-
+        this.setState({
+            showStatus: !this.state.showStatus
+        })
     }
+
 
 
     render(){
@@ -82,7 +89,30 @@ class Main extends Component{
                 {
                     this.state.showStatus?
                         <div className="Status-list">
-                            
+                            <div className="opacitybackground">
+                                <div className="chickenlist">
+                                    <table className="status-box">
+                                        <tr>
+                                            <td>性別</td>
+                                            <td>大小</td>
+                                            <td>施打疫苗</td>
+                                            <td>傳染</td>
+                                            <td>餵食</td>
+                                            <td>牛刀</td>
+                                            <td>交配</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Male</td>
+                                            <td>Large</td>
+                                            <td>是</td>
+                                            <td>否</td>
+                                            <td>餵食</td>
+                                            <td>牛刀</td>
+                                            <td>交配</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     :null
                 }

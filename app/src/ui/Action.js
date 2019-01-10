@@ -47,7 +47,7 @@ class Action extends Component{
     render(){
         return(
             <div className="action-wrapper">
-                <div className="opacity-black"></div>
+                <div className="opacity-black">
                     <div className="action-intro">請選擇您本回合要進行的行動</div>
                     <img className="bomb animated infinite flash" src={Countdown} alt="" />
                     <table className="action-box">
@@ -76,6 +76,7 @@ class Action extends Component{
                             </td>
                         </tr>
                     </table>
+                </div>
             </div>
         )
     }

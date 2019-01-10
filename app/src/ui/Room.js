@@ -20,7 +20,6 @@ class Room extends Component {
       this.props.socket.on('ROOM_STATUS', (data)=>{
         this.props.updateRoomID(data)
         this.props.changeSection(2)
-        console.log(data)
       })
     }
 

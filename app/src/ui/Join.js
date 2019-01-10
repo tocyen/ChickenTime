@@ -7,6 +7,8 @@ class Join extends Component{
         this.state={
             rid: 0,
             }
+            this.onChange = this.onChange.bind(this)
+            this.join_req = this.join_req.bind(this)
         }
 
         join_req(){
@@ -18,11 +20,12 @@ class Join extends Component{
 
         onChange(e){
             this.setState({rid: e.target.value})
-          }
+        }
 
         componentDidMount(){
-            this.props.socket.on('ROOM_STATUS', ()=>{
+            this.props.socket.on('ROOM_STATUS', (data)=>{
                 this.props.changeSection(2)
+                // console.log(data)
             })
         }
 

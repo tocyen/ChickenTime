@@ -20,9 +20,9 @@ const dialogData = [
     {title:'道具介紹', pic: Feed, item:'飼料', text:'餵食後可讓雞向上升一階'},
     {title:'道具介紹', pic: Vaccine, item:'疫苗', text:'避免雞隻感染禽流感，取得雞三季內未施打，就會得禽流感'},
     {title:'道具介紹', pic: Knife, item:'牛刀', text:'宰殺感染禽流感的雞隻，避免禽流感爆發，而傳染給其它雞隻'},
-    {title:'雞種介紹', animalpic: Smale, animal2pic: Sfemale, animal:'小公雞', animal2:'小母雞', text:'無法交配'},
-    {title:'雞種介紹', animalpic: Mmale, animal2pic: Mfemale, animal:'中公雞', animal2:'中母雞', text:'交配後產 1~2 顆蛋'},
-    {title:'雞種介紹', animalpic: Lmale, animal2pic: Lfemale, animal:'大公雞', animal2:'大母雞', text:'交配後產 2~3 顆蛋'},
+    {title:'雞種介紹', animalpic: Smale, animal2pic: Sfemale, animal:'小公雞', animal2:'小母雞', extraText:'無法交配'},
+    {title:'雞種介紹', animalpic: Mmale, animal2pic: Mfemale, animal:'中公雞', animal2:'中母雞', extraText:'交配後產 1~2 顆蛋'},
+    {title:'雞種介紹', animalpic: Lmale, animal2pic: Lfemale, animal:'大公雞', animal2:'大母雞', extraText:'交配後產 2~3 顆蛋'},
 ]
 
 
@@ -38,25 +38,37 @@ class Tutorial extends Component{
 
     updateDialog(){
             this.setState({dialogNum: this.state.dialogNum + 1})
+            console.log(this.state.dialogNum)
             if(this.state.dialogNum === 6){
                 this.props.changeSection(5)
             }
     }
 
-
     render(){
-
         return(
             <div className="Tutorial-wrapper">
                     <div className="dialog-box" onClick={this.updateDialog}>
                         <div className="dialog-title">{dialogData[this.state.dialogNum].title}</div>
                         <div className="item-title">{dialogData[this.state.dialogNum].item}</div>
-                        <img className="animalpic" src={dialogData[this.state.dialogNum].animalpic} alt="" />
-                        <img className="animal2pic" src={dialogData[this.state.dialogNum].animal2pic} alt="" />
-                        <div className="animal">{dialogData[this.state.dialogNum].animal}</div>
-                        <div className="animal2">{dialogData[this.state.dialogNum].animal2}</div>
-                        <img className="pic" src={dialogData[this.state.dialogNum].pic} alt="" />
-                        <div className="text">{dialogData[this.state.dialogNum].text}</div>
+
+
+                        { dialogData[this.state.dialogNum].pic ?
+                            <img className="pic" src={dialogData[this.state.dialogNum].pic} alt="" />
+                            : (dialogData[this.state.dialogNum].animalpic) ? <span>
+                            <img className="animalpic" src={dialogData[this.state.dialogNum].animalpic} alt=""/>
+                            <img className="animal2pic" src={dialogData[this.state.dialogNum].animal2pic} alt=""/>
+                            <div className="animal">{dialogData[this.state.dialogNum].animal}</div>
+                            <div className="animal2">{dialogData[this.state.dialogNum].animal2}</div>
+                            <div className="extraText">{dialogData[this.state.dialogNum].extraText}</div>
+                        </span> : null
+                        }
+
+                        {
+                            dialogData[this.state.dialogNum].text ?
+                            <div className="text">{dialogData[this.state.dialogNum].text}</div>
+                            : null
+                        }
+
                         <div className="content">{dialogData[this.state.dialogNum].content}</div>
                         <FontAwesomeIcon className="nav-icon animated infinite flash" icon={faCaretDown}/>
                     </div>

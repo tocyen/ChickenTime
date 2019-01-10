@@ -26,13 +26,12 @@ html, body{
     margin: 0 auto;
     width: 65%;
     position: fixed;
-    bottom: 24%;
+    bottom: 20%;
     left: 8%;
     letter-spacing: 2px;
     font-weight: 400;
     padding: 20px;
     font-size: 18px;
-    text-align:left;
     text-align: start;
 }
 
@@ -78,12 +77,18 @@ html, body{
     padding-top: 30px;
 }
 
-/* .animalpic, .animal2pic{
+.animalpic, .animal2pic{
     width: 20%;
-} */
+    text-align: center;
+    display: inline-block;
+    margin-left: 20%;
+}
 
 .animal, .animal2{
     display: inline-block;
-
+    margin-left: 25%;
 }
 
+.extraText{
+    text-align: center;
+}

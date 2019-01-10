@@ -37,7 +37,7 @@
     z-index: -1;
 }
 
-.chickhouse, td{
+.chickhouse td{
     border: 3px solid black;
     border-radius: 10px;
     -moz-border-radius: 5px;
@@ -70,4 +70,71 @@
     position: absolute;
     top: 65%;
     left: 80%;
+}
+
+.chickenlist{
+    border: 2px solid black;
+    background-color: rgba(236, 236, 236, 0.9);
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 80%;
+    position: fixed;
+    bottom: 24%;
+    left: 7%;
+    letter-spacing: 2px;
+    font-weight: 400;
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.opacitybackground{
+    position: fixed;
+    background-color: rgba(200, 200, 200, 0.6);
+    width: 100%;
+    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    top: 0;
+    left: 0;
+}
+
+.status-box{
+    border-spacing: 20px;
+}
+
+.status-box tr:first-child td{
+    text-align: center;
+    font-weight: 500;
+    font-size: 120%;
+}
+
+.status-box td{
+    text-align: center;
+
+}
+
+.status-box tr:nth-child(2) td:nth-child(5){
+    border: 2px solid #000;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #D26406;
+    color: #fff;
+    font-weight: 400;
+}
+
+.status-box tr:nth-child(2) td:nth-child(6){
+    border: 2px solid #000;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #D26406;
+    color: #fff;
+    font-weight: 400;
+}
+
+.status-box tr:nth-child(2) td:nth-child(7){
+    border: 2px solid #000;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #D26406;
+    color: #fff;
+    font-weight: 400;
 }
