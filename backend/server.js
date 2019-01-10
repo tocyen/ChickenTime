@@ -198,27 +198,56 @@ function purchaseReq(data, id) {
   console.log('[PURCHASE REQ]');
 
   const user = room.players.find(x => x.uid === id);
-  if(!user || !data.item || !data.length) return;
+  if(!user || !data.item) return;
 
   switch (data.item) {
     case 'knife':
-      if (3 * data.length <= user.money) {
-        user.money -= 3 * data.length;
-        user.items.knife += data.length;
+      if (3 <= user.money) {
+        user.money -= 3;
+        user.items.knife += 1;
       }
       break;
     case 'feed':
-      if (data.length <= user.money) {
-        user.money -= data.length;
-        user.items.feed += data.length;
+      if (1 <= user.money) {
+        user.money -= d1;
+        user.items.feed += 1;
       }
       break;
     case 'shot':
-      if (data.length <= user.money) {
-        user.money -= data.length;
-        user.items.shot += data.length;
+      if (1 <= user.money) {
+        user.money -= 1;
+        user.items.shot += 1;
       }
       break;
+    case 'chick_s':
+      if (6 <= user.money) {
+        user.money -= 6;
+        user.chickens.push({
+          size: 'S',
+          gender: (Math.random() <= 0.5 ? 'M' : 'F'),
+          shot: false
+        });
+      }
+      break;
+    case 'chick_m':
+      if (10 <= user.money) {
+        user.money -= 10;
+        user.chickens.push({
+          size: 'M',
+          gender: (Math.random() <= 0.5 ? 'M' : 'F'),
+          shot: false
+        });
+      }
+      break;
+    case 'chick_l':
+      if (15 <= user.money) {
+        user.money -= 16;
+        user.chickens.push({
+          size: 'L',
+          gender: (Math.random() <= 0.5 ? 'M' : 'F'),
+          shot: false
+        });
+      }
     default:
       return;
   }
