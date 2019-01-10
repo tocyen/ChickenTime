@@ -94,6 +94,7 @@ function createReq(data, id) {
         name: data.name,
         uid: id,
         money: initialMoney,
+        eggs: 0,
         items: { knife: 0, shot: 0, feed: 0 },
         actions: { feed: 0, sex: 0, buy: 0, sell: 0 },
         chickens: [],
@@ -119,6 +120,7 @@ function joinReq(data, id) {
       name: data.name,
       uid: id,
       money: initialMoney,
+      eggs: 0,
       items: { knife: 0, shot: 0, feed: 0 },
       actions: { feed: 0, sex: 0, buy: 0, sell: 0 },
       chickens: [],
@@ -254,12 +256,12 @@ function actionReq(data, id) {
   console.log('[ACTION_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
-  switch (data.item) {
+  switch (data.action) {
     case 'feed':
     case 'sex':
     case 'purchase':
     case 'sell':
-      user.actionEnd = data.item;
+      user.actionEnd = data.action;
       break;
     default:
       return;
@@ -291,6 +293,14 @@ function actionReq(data, id) {
     room.players.map(user => {
       user.actionEnd = false;
       delete user.actionEnd;
+      for(let i=0;i<user.eggs;i++){
+        user.chickens.push({
+          size: 'S',
+          gender: (Math.random() <= 0.5 ? 'M' : 'F'),
+          shot: false
+        });
+      }
+      user.eggs = 0;
       sendToUser('USER_STATUS', user.uid, user);
     });
 
@@ -346,6 +356,16 @@ function sexReq(data, id) {
   console.log('[SEX_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
+  if (!user || !data.size) return;
+  if (user.actions.sex <= 0) return;
+
+  const chickens = user.chickens.filter(x => x.size === data.size);
+  if (chickens.filter(x => x.gender === 'F').length >= 1 && chickens.filter(x => x.gender === 'M').length >= 1) {
+    user.eggs += 1;
+  }
+  user.actions.sex -= 1;
+
+  sendToUser('USER_STATUS', id, user);
 }
 
 function sellReq(data, id) {
