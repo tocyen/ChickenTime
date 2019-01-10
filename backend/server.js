@@ -306,21 +306,58 @@ function actionReq(data, id) {
 }
 
 function feedReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[FEED_REQ ' + data.rid + ']');
 
+  const user = room.players.find(x => x.uid === id);
+  if(!user || !data.cid) return;
+
+  if(user.items.feed <=0 || user.actions.feed <= 0) return;
+
+  const chick = user.chickens.find(x => x.cid === data.cid);
+  if(!chick) return;
+  if(chick.size === 'L') return;
+
+  if(chick.size === 'S') {
+    chick.size = 'M';
+  } else if(chick.size === 'M') {
+    chick.size = 'L';
+  }
+  user.actions.feed -= 1;
+  user.items.feed -= 1;
+
+  sendToUser('USER_STATUS', id, user);
 }
 
 function sexReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[SEX_REQ ' + data.rid + ']');
 
+  const user = room.players.find(x => x.uid === id);
 }
 
 function sellReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[SELL_REQ ' + data.rid + ']');
 
+  const user = room.players.find(x => x.uid === id);
 }
 
 function killReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[KILL_REQ ' + data.rid + ']');
 
+  const user = room.players.find(x => x.uid === id);
 }
 
 function shotReq(data, id) {
+  const room = rooms.find(x => x.rid === data.rid);
+  if (!room) return;
+  console.log('[SHOT_REQ ' + data.rid + ']');
 
+  const user = room.players.find(x => x.uid === id);
 }
