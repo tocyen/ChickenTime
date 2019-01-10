@@ -352,6 +352,17 @@ function killReq(data, id) {
   console.log('[KILL_REQ ' + data.rid + ']');
 
   const user = room.players.find(x => x.uid === id);
+  if(!user || !data.cid) return;
+
+  if(user.items.knife <=0) return;
+
+  const chick = user.chickens.find(x => x.cid === data.cid);
+  if(!chick) return;
+
+  user.chicken = user.chicken.filter(x => x.cid !== data.cid);
+
+  user.items.knife -= 1;
+  sendToUser('USER_STATUS', id, user);
 }
 
 function shotReq(data, id) {
